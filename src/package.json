@@ -4,7 +4,6 @@
   "description": "Boilerplate template for creating joules.",
   "main": "index.js",
   "dependencies": {
-    "google": "^1.4.0",
     "joule-node-response": "<2.0.0"
   },
   "devDependencies": {
