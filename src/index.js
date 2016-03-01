@@ -9,12 +9,16 @@
  *    event.{pathParam}, Path parameters as defined in your .joule.yml
  *    event.{queryStringParam}, Query string parameters as defined in your .joule.yml
  */
-var response = require('joule-node-response');
+var Response = require('joule-node-response');
 
 exports.handler = function(event, context) {
-  if(typeof(event.Body) === "undefined") {
-    response.error400(context, 'No Body passed in');
+	var response = new Response();
+	response.setContext(context)
+	response.setContentType('application/xml');
+  if(typeof(event.post['Body']) === "undefined") {
+		response.setHttpStatusCode(400);
+    response.send('<error>No Body passed in</error>');
     return;
   }
-  response.successRaw(context, "<Response><Sms>"+event.Body+"</Sms></Response>");
+  response.send("<Response><Sms>"+event.post['Body']+"</Sms></Response>");
 };
